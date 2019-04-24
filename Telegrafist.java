@@ -1,16 +1,23 @@
-class Telegrafist{
+class Telegrafist extends Thread {
     private Kanal kanal;
     private KryptoMonitor monitor;
+    private static int ID = 0;
 
-    public Telegrafist(Kanal e, KryptoMonitor i){
-        kanal = e;
-        monitor = i;
+    public Telegrafist(Kanal[] e, KryptoMonitor i){
+        this.kanal = e[this.ID];
+        this.monitor = i;
+        this.ID++;
     }
 
-    public Melding lytt(){
+    // public int hentID(){
+    //     return this.ID;
+    // }
+
+    @Override
+    public void run(){
         while (kanal.lytt() != null){
             Melding melding = new Melding(this.kanal.lytt(), this.kanal);
-            monitor.add(melding);
+            monitor.sendMelding(melding);
         }
     }
 }

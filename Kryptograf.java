@@ -1,0 +1,3 @@
+class Kryptograf extends Thread {
+
+}
