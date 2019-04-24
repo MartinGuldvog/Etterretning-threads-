@@ -9,15 +9,11 @@ class Telegrafist extends Thread {
         this.ID++;
     }
 
-    // public int hentID(){
-    //     return this.ID;
-    // }
-
     @Override
     public void run(){
         while (kanal.lytt() != null){
             Melding melding = new Melding(this.kanal.lytt(), this.kanal);
-            monitor.sendMelding(melding);
+            monitor.sendMeldingTilMonitor(melding);
         }
     }
 }

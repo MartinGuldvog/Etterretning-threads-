@@ -5,8 +5,12 @@ class KryptoMonitor {
 
     KryptoMonitor(){}
 
-    public void sendMelding(Melding e){
-        meldinger.add(e);
+    public void sendMeldingTilMonitor(Melding e){
+        this.meldinger.add(e);
+    }
+
+    public Melding sendMeldingTilKryptograf(int i){
+        return this.meldinger.get(i);
     }
 
 

@@ -8,4 +8,8 @@ class Melding {
         fraID = i.hentId();
         sekvensnummer++;
     }
+
+    public String hentMelding(){
+        return innhold;
+    }
 }
