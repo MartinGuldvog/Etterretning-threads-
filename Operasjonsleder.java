@@ -1,0 +1,3 @@
+class Operasjonsleder extends Thread {
+    
+}
