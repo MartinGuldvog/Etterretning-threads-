@@ -1,7 +1,7 @@
 class Telegrafist extends Thread {
     public Kanal kanal;
     private KryptoMonitor monitor;
-    private static int IDteller = 0;
+    public static int IDteller = 0;
     private int ID;
     public static boolean alleLest = false;
 
@@ -14,6 +14,10 @@ class Telegrafist extends Thread {
 
     public int hentId(){
         return this.ID;
+    }
+
+    public int hentAntallKanaler(){
+        return this.IDteller;
     }
 
     @Override
