@@ -31,5 +31,6 @@ class Kryptograf extends Thread {
             }
         }
         this.alleDekryptert = true;
+        dekryptoMonitor.settAlleDekryptert();
     }
 }

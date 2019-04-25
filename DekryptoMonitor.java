@@ -7,6 +7,7 @@ class DekryptoMonitor {
     private ArrayList<Melding> meldinger = new ArrayList<Melding>();
     private Lock laas = new ReentrantLock();
     private Condition ikkeTom = laas.newCondition();
+    private boolean alleDekryptert = false;
 
     DekryptoMonitor(){}
 
@@ -36,4 +37,7 @@ class DekryptoMonitor {
         return meldinger.size();
     }
 
+    public boolean settAlleDekryptert(){
+        this.alleDekryptert = true;
+    }
 }
