@@ -1,16 +1,13 @@
 import java.util.ArrayList;
 
 class Kryptograf extends Thread {
-    // private Operasjonsleder operasjonsleder;
-    private KryptoMonitor kryptoMonitor;
-    private DekryptoMonitor dekryptoMonitor;
-    private Operasjonsleder operasjonsleder;
+    private Monitor kryptoMonitor;
+    private Monitor dekryptoMonitor;
     private static int IDteller = 0;
     private int ID;
-    public boolean alleDekryptert = false;
+    public static boolean alleLest = false;
 
-    public Kryptograf(Operasjonsleder a, KryptoMonitor b, DekryptoMonitor c){
-        this.operasjonsleder = a;
+    public Kryptograf(Monitor b, Monitor c){
         this.kryptoMonitor = b;
         this.dekryptoMonitor = c;
         this.ID = this.IDteller;
@@ -19,18 +16,20 @@ class Kryptograf extends Thread {
 
     @Override
     public void run(){
-        int teller = 0;
-        while (kryptoMonitor.sjekkAlleLest() != true){
+        boolean kjor = true;
+        while (kryptoMonitor.telegrafisterFerdigOgMonitorTom() != true){
+        // while (kryptoMonitor.hentMeldingFraMonitor() != null){
+            System.out.println("test while loop krypto");
             try{
-                Melding ny = kryptoMonitor.sendMeldingTilKryptograf();
+                Melding ny = kryptoMonitor.hentMeldingFraMonitor();
                 String dekrypterMld = Kryptografi.dekrypter(ny.hentMelding());
                 Melding dekryptertMelding = new Melding(dekrypterMld, ny.hentFraID());
-                dekryptoMonitor.sendMeldingTilDekryptoMonitor(dekryptertMelding);
+                dekryptoMonitor.sendMeldingTilMonitor(dekryptertMelding);
+                System.out.println("test kryp");
             }catch (InterruptedException e){
                 throw new RuntimeException(e);
             }
         }
-        this.alleDekryptert = true;
-        dekryptoMonitor.settAlleDekryptert();
+        this.alleLest = true;
     }
 }

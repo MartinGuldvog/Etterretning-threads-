@@ -1,11 +1,11 @@
 class Telegrafist extends Thread {
     public Kanal kanal;
-    private KryptoMonitor monitor;
+    private Monitor monitor;
     public static int IDteller = 0;
     private int ID;
     public static boolean alleLest = false;
 
-    public Telegrafist(Kanal e, KryptoMonitor i){
+    public Telegrafist(Kanal e, Monitor i){
         this.kanal = e;
         this.monitor = i;
         this.ID = this.IDteller;
@@ -26,11 +26,12 @@ class Telegrafist extends Thread {
             try{
                 Melding melding = new Melding(this.kanal.lytt(), ID);
                 monitor.sendMeldingTilMonitor(melding);
+                // System.out.println("test tele" + melding.hentSekvensnummer() + " " + this.ID);
+                // System.out.println(melding.hentMelding());
             } catch (InterruptedException e){
                 throw new RuntimeException(e);
             }
         }
         this.alleLest = true;
-        monitor.SettAlleLest();
     }
 }
