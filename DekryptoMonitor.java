@@ -37,7 +37,7 @@ class DekryptoMonitor {
         return meldinger.size();
     }
 
-    public boolean settAlleDekryptert(){
+    public void settAlleDekryptert(){
         this.alleDekryptert = true;
     }
 }

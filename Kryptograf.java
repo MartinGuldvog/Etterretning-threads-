@@ -4,13 +4,13 @@ class Kryptograf extends Thread {
     // private Operasjonsleder operasjonsleder;
     private KryptoMonitor kryptoMonitor;
     private DekryptoMonitor dekryptoMonitor;
+    private Operasjonsleder operasjonsleder;
     private static int IDteller = 0;
     private int ID;
     public boolean alleDekryptert = false;
 
-    //Operasjonsleder a,
-    public Kryptograf(KryptoMonitor b, DekryptoMonitor c){
-        // this.operasjonsleder = a;
+    public Kryptograf(Operasjonsleder a, KryptoMonitor b, DekryptoMonitor c){
+        this.operasjonsleder = a;
         this.kryptoMonitor = b;
         this.dekryptoMonitor = c;
         this.ID = this.IDteller;
