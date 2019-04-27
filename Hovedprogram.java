@@ -15,7 +15,7 @@ public class Hovedprogram {
         opprettTelegraf();
         opprettKryptografer(20);
         startAlt();
-        operasjonsleder.testInnhold();
+        // operasjonsleder.testInnhold();
 
         // for (Telegrafist t : telegrafister){
         //     System.out.println("Telegrafist. KanalID = " + t.hentKanal().hentId());

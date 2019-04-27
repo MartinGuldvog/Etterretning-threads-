@@ -37,7 +37,7 @@ class Monitor {
     public void sendMeldingTilMonitor(Melding e) throws InterruptedException{
         laas.lock();
         try{
-            this.meldinger.add(/*e.hentSekvensnummer()-1, */e);
+            this.meldinger.add(/*e.hentSekvensnummer() -1,*/ e);
             antallInn++;
             ikkeTom.signalAll();
         } finally{

@@ -50,13 +50,16 @@ class Operasjonsleder extends Thread {
         while (monitor.kryptograferFerdigOgMonitorTom() != true){
             try{
                 Melding ny = monitor.hentMeldingFraMonitor();
-                int temp = ny.hentFraID();
-                this.sorterteMeldinger.get(temp).add(ny.hentMelding());
-                testInnhold();
+                if (ny != null){
+                    int temp = ny.hentFraID();
+                    this.sorterteMeldinger.get(temp).add(ny.hentMelding());
+                    System.out.println(ny.hentMelding());
+                }
             }catch (InterruptedException e){
                 throw new RuntimeException(e);
             }
         }
+        testInnhold();
         for (int i = 0; i <= antallkanaler -1; i++){
             skrivTilFil(sorterteMeldinger, i, "tekst" + this.dokuementTeller + ".txt");
             dokuementTeller++;
