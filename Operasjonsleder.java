@@ -22,9 +22,9 @@ class Operasjonsleder extends Thread {
 
     public void testInnhold(){
         for (ArrayList<String> i : sorterteMeldinger){
-            System.out.println("test");
-            // for (String e : i){
-            // }
+            for (String e : i){
+                System.out.println(e);
+            }
         }
     }
 
@@ -52,7 +52,7 @@ class Operasjonsleder extends Thread {
                 Melding ny = monitor.hentMeldingFraMonitor();
                 int temp = ny.hentFraID();
                 this.sorterteMeldinger.get(temp).add(ny.hentMelding());
-                System.out.println("test");
+                testInnhold();
             }catch (InterruptedException e){
                 throw new RuntimeException(e);
             }

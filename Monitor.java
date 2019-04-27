@@ -10,19 +10,36 @@ class Monitor {
     private Condition ikkeTom = laas.newCondition();
     private int antallInn;
     private int antallUt;
+    private ArrayList<Telegrafist> telegrafister = new ArrayList<Telegrafist>();
+    private ArrayList<Kryptograf> kryptografer = new ArrayList<Kryptograf>();
 
     Monitor(){}
+
+    public boolean telegrafisterFerdig(){
+        for (Telegrafist t : this.telegrafister){
+            if (t.alleLest() == false){
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+    public boolean kryptograferFerdig(){
+        for (Kryptograf k : this.kryptografer){
+            if (k.alleLest() == false){
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
 
     public void sendMeldingTilMonitor(Melding e) throws InterruptedException{
         laas.lock();
         try{
-            // System.out.println("monitor mottar melding");
-            this.meldinger.add(e.hentSekvensnummer()-1, e);
+            this.meldinger.add(/*e.hentSekvensnummer()-1, */e);
             antallInn++;
             ikkeTom.signalAll();
-            // for (Melding m : meldinger){
-            //     System.out.println("det er noe her");
-            // }
         } finally{
             laas.unlock();
         }
@@ -33,9 +50,7 @@ class Monitor {
         try{
             if (this.meldinger.size() == 0){
                 ikkeTom.await();
-                System.out.println("venter på å sende");
             }
-            System.out.println("monitor sender melding");
             antallUt++;
             return this.meldinger.remove(0);
         } finally{
@@ -44,10 +59,21 @@ class Monitor {
     }
 
     public boolean telegrafisterFerdigOgMonitorTom(){
-        // if (Telegrafist.alleLest = true && meldinger.size() <= 0){
-        if (this.antallUt == this.antallInn){
-            if (Telegrafist.alleLest = true){
+        if (this.antallUt == this.antallInn && meldinger.size() == 0){
+            if (telegrafisterFerdig() == true){
                 System.out.println("telegrafister og montitor ferdig");
+                return true;
+            }
+            return false;
+        }
+        return false;
+
+    }
+
+    public boolean kryptograferFerdigOgMonitorTom(){
+        if (this.antallUt == this.antallInn && meldinger.size() == 0){
+            if (kryptograferFerdig() == true){
+                System.out.println("kryptografer og monitor ferdig");
                 return true;
             }
             return false;
@@ -55,16 +81,12 @@ class Monitor {
         return false;
     }
 
-    public boolean kryptograferFerdigOgMonitorTom(){
-        // if (Kryptograf.alleLest = true && meldinger.size() <= 0){
-        if (this.antallUt == this.antallInn){
-            if (Kryptograf.alleLest = true){
-                System.out.println("kryptografer og monitor ferdig");
-                return true;
-            }
-            return false;
-        }
-        return false;
+    public void leggTilTelegraf(Telegrafist t){
+        this.telegrafister.add(t);
+    }
+
+    public void leggTilKryptograf(Kryptograf k){
+        this.kryptografer.add(k);
     }
 
 }

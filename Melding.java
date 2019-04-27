@@ -1,13 +1,14 @@
 class Melding {
     public String innhold;
-    public static int sekvensnummer;
+    public static int sekvensteller;
+    private int sekvensnummer;
     public int fraID;
-    // public boolean harBlittDekryptert = false;
 
     public Melding(String e, int i){
         innhold = e;
         fraID = i;
-        sekvensnummer++;
+        this.sekvensteller++;
+        this.sekvensnummer = this.sekvensteller;
     }
 
     public String hentMelding(){
