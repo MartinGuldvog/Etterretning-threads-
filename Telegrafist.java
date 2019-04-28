@@ -43,5 +43,7 @@ class Telegrafist extends Thread {
             }
         }
         this.alleLest = true;
+        System.out.println("telegraf: " + this.ID + " er interrupted");
+        Thread.currentThread().interrupt();
     }
 }

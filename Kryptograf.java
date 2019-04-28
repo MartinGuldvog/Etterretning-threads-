@@ -39,5 +39,8 @@ class Kryptograf extends Thread {
             }
         }
         this.alleLest = true;
+        System.out.println("Kryptograf: " + this.ID + " er interrupted");
+        // Thread.currentThread().interrupt();
+        return;
     }
 }
