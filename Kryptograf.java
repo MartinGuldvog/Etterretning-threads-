@@ -25,7 +25,7 @@ class Kryptograf extends Thread {
     @Override
     public void run(){
         dekryptoMonitor.leggTilKryptograf(this);
-        if (kryptoMonitor.harMottatMelding()){
+        // if (kryptoMonitor.harMottatMelding()){
             while (kryptoMonitor.telegrafisterFerdigOgMonitorTom() != true){
                 try{
                     Melding ny = kryptoMonitor.hentMeldingFraMonitor();
@@ -33,6 +33,7 @@ class Kryptograf extends Thread {
                         String dekrypterMld = Kryptografi.dekrypter(ny.hentMelding());
                         Melding dekryptertMelding = new Melding(dekrypterMld, ny.hentFraID());
                         dekryptoMonitor.sendMeldingTilMonitor(dekryptertMelding);
+                        System.out.println("kryptografer har sendt melding");
 
                     }
                 }catch (InterruptedException e){
@@ -47,5 +48,5 @@ class Kryptograf extends Thread {
 
         }
 
-        }
+        // }
 }

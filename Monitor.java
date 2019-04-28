@@ -65,6 +65,7 @@ class Monitor {
     public boolean telegrafisterFerdigOgMonitorTom(){
         if (meldinger.size() == 0 && telegrafisterFerdig() == true && this.antallUt == this.antallInn){
             System.out.println("telegrafister og montitor ferdig");
+            // ikkeTom.signalAll();
             return true;
         }
         return false;
@@ -73,6 +74,7 @@ class Monitor {
     public boolean kryptograferFerdigOgMonitorTom(){
         if (meldinger.size() == 0 && kryptograferFerdig() == true && this.antallUt == this.antallInn){
             System.out.println("kryptografer og monitor ferdig");
+            // ikkeTom.signalAll();
             return true;
         }
         return false;

@@ -47,7 +47,7 @@ class Operasjonsleder extends Thread {
     @Override
     public void run(){
         lagBeholdere();
-        if (monitor.harMottatMelding()){
+        // if (monitor.harMottatMelding()){
             while (monitor.kryptograferFerdigOgMonitorTom() != true){
                 try{
                     Melding ny = monitor.hentMeldingFraMonitor();
@@ -67,6 +67,6 @@ class Operasjonsleder extends Thread {
             }
 
 
-        }
+        // }
     }
 }
