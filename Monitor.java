@@ -20,18 +20,22 @@ class Monitor {
             if (t.alleLest() == false){
                 return false;
             }
-            return true;
         }
-        return false;
+        return true;
     }
+
     public boolean kryptograferFerdig(){
         for (Kryptograf k : this.kryptografer){
             if (k.alleLest() == false){
                 return false;
             }
-            return true;
         }
-        return false;
+        return true;
+    }
+
+
+    public boolean harMottatMelding(){
+        return antallInn >= 1;
     }
 
     public void sendMeldingTilMonitor(Melding e) throws InterruptedException{
@@ -39,7 +43,7 @@ class Monitor {
         try{
             this.meldinger.add(/*e.hentSekvensnummer() -1,*/ e);
             antallInn++;
-            ikkeTom.signalAll();
+            ikkeTom.signal();
         } finally{
             laas.unlock();
         }
@@ -59,24 +63,17 @@ class Monitor {
     }
 
     public boolean telegrafisterFerdigOgMonitorTom(){
-        if (this.antallUt == this.antallInn && meldinger.size() == 0){
-            if (telegrafisterFerdig() == true){
-                System.out.println("telegrafister og montitor ferdig");
-                return true;
-            }
-            return false;
+        if (meldinger.size() == 0 && telegrafisterFerdig() == true && this.antallUt == this.antallInn){
+            System.out.println("telegrafister og montitor ferdig");
+            return true;
         }
         return false;
-
     }
 
     public boolean kryptograferFerdigOgMonitorTom(){
-        if (this.antallUt == this.antallInn && meldinger.size() == 0){
-            if (kryptograferFerdig() == true){
-                System.out.println("kryptografer og monitor ferdig");
-                return true;
-            }
-            return false;
+        if (meldinger.size() == 0 && kryptograferFerdig() == true && this.antallUt == this.antallInn){
+            System.out.println("kryptografer og monitor ferdig");
+            return true;
         }
         return false;
     }
@@ -90,3 +87,6 @@ class Monitor {
     }
 
 }
+//
+// this.antallUt == this.antallInn &&
+// this.antallUt == this.antallInn &&
