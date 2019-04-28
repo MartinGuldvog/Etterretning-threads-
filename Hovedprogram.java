@@ -12,9 +12,8 @@ public class Hovedprogram {
 
     public static void main(String[] args) {
 
-        opprettTelegraf();
-        opprettKryptografer(20);
-        startAlt();
+        startAlt(20); //antall kryptografer som parameter
+        
         // operasjonsleder.testInnhold();
 
         // for (Telegrafist t : telegrafister){
@@ -24,9 +23,6 @@ public class Hovedprogram {
         // for (Kryptograf k : kryptografer){
         //     System.out.println("Kryptograf. ID = " + k.hentId());
         // }
-
-
-
     }
 
     public static void opprettTelegraf(){
@@ -55,7 +51,9 @@ public class Hovedprogram {
         }
     }
 
-    public static void startAlt(){
+    public static void startAlt(int i){
+        opprettTelegraf();
+        opprettKryptografer(i);
         startTelegrafister();
         startKryptografer();
         operasjonsleder = new Operasjonsleder(dekryptoMonitor);

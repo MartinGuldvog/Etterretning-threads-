@@ -25,28 +25,22 @@ class Kryptograf extends Thread {
     @Override
     public void run(){
         dekryptoMonitor.leggTilKryptograf(this);
-        // if (kryptoMonitor.harMottatMelding()){
-            while (kryptoMonitor.telegrafisterFerdigOgMonitorTom() != true){
-                try{
-                    Melding ny = kryptoMonitor.hentMeldingFraMonitor();
-                    if (ny.hentMelding() != null){
-                        String dekrypterMld = Kryptografi.dekrypter(ny.hentMelding());
-                        Melding dekryptertMelding = new Melding(dekrypterMld, ny.hentFraID());
-                        dekryptoMonitor.sendMeldingTilMonitor(dekryptertMelding);
-                        System.out.println("kryptografer har sendt melding");
-
-                    }
-                }catch (InterruptedException e){
-                    throw new RuntimeException(e);
+        while (kryptoMonitor.telegrafisterFerdigOgMonitorTom() != true){
+            try{
+                Melding ny = kryptoMonitor.hentMeldingFraMonitor();
+                if (ny.hentMelding() != null){
+                    String dekrypterMld = Kryptografi.dekrypter(ny.hentMelding());
+                    Melding dekryptertMelding = new Melding(dekrypterMld, ny.hentFraID());
+                    dekryptoMonitor.sendMeldingTilMonitor(dekryptertMelding);
                 }
+            }catch (InterruptedException e){
+                throw new RuntimeException(e);
             }
-            this.alleLest = true;
-            System.out.println("Kryptograf: " + this.ID + " er interrupted");
-            // Thread.currentThread().interrupt();
-            // return;
-            // }
-
         }
-
+        this.alleLest = true;
+        // System.out.println("Kryptograf: " + this.ID + " er interrupted");
+        // Thread.currentThread().interrupt();
+        // return;
         // }
+    }
 }
