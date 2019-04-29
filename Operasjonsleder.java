@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 class Operasjonsleder extends Thread {
     private Monitor monitor;
     private int antallkanaler = Telegrafist.IDteller;
-    private ArrayList<ArrayList<String>> sorterteMeldinger = new ArrayList<ArrayList<String>>();
+    private ArrayList<ArrayList<Melding>> sorterteMeldinger = new ArrayList<ArrayList<Melding>>();
     private static int dokuementTeller = 1;
 
     public Operasjonsleder(Monitor m){
@@ -15,31 +15,31 @@ class Operasjonsleder extends Thread {
 
     public void lagBeholdere(){
         for (int i = 0; i <= antallkanaler; i++){
-            ArrayList<String> ny = new ArrayList<String>();
+            ArrayList<Melding> ny = new ArrayList<Melding>();
             sorterteMeldinger.add(ny);
         }
     }
 
     public void testInnhold(){
-        for (ArrayList<String> i : sorterteMeldinger){
-            for (String e : i){
-                System.out.println(e);
+        for (ArrayList<Melding> i : sorterteMeldinger){
+            for (Melding e : i){
+                System.out.println(e.hentMelding());
             }
         }
     }
 
-    public static void skrivTilFil(ArrayList<ArrayList<String>> liste, int index, String fil) {
+    public static void skrivTilFil(ArrayList<ArrayList<Melding>> liste, int index, String fil) {
         File f = new File(fil);
         try{
-            PrintWriter printer = new PrintWriter(f /*,"utf-8"*/);
-            ArrayList<String> temp = liste.get(index);
+            PrintWriter printer = new PrintWriter(f ,"utf-8");
+            ArrayList<Melding> temp = liste.get(index);
 
-            for (String s : temp){
-                printer.append(s + "\n\n");
+            for (Melding m : temp){
+                printer.append(m.hentMelding() + "\n\n");
             }
             printer.close();
 
-            }catch (FileNotFoundException e) {
+            }catch (Exception e) {
                 System.out.println(e.getMessage());
             }
     }
@@ -52,8 +52,7 @@ class Operasjonsleder extends Thread {
                 Melding ny = monitor.hentMeldingFraMonitor();
                 if (ny.hentMelding() != null){
                     int temp = ny.hentFraID();
-                    this.sorterteMeldinger.get(temp).add(ny.hentMelding());
-                    System.out.println(ny.hentMelding());
+                    this.sorterteMeldinger.get(temp).add(ny);
                 }
             }catch (InterruptedException e){
                 throw new RuntimeException(e);

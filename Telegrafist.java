@@ -37,13 +37,11 @@ class Telegrafist extends Thread {
                 Melding melding = new Melding(s, ID);
                 if (melding.hentMelding() != null){
                     monitor.sendMeldingTilMonitor(melding);
-                    System.out.println("test telegraf: Melding: " + melding.hentSekvensnummer() + " TelegrafensID " + this.ID);
                 }
             } catch (InterruptedException e){
                 throw new RuntimeException(e);
             }
         }
         this.alleLest = true;
-        System.out.println("Telegrafist: " + this.ID);
     }
 }

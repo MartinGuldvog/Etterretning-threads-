@@ -41,18 +41,10 @@ class Monitor {
         return true;
     }
 
-    public boolean harMottatMelding(){
-        return antallInn >= 1;
-    }
-
-    public boolean erIkkeTom(){
-        return this.meldinger.size() > 0;
-    }
-
     public void sendMeldingTilMonitor(Melding e) throws InterruptedException{
         laas.lock();
         try{
-            this.meldinger.add(/*e.hentSekvensnummer() -1,*/ e);
+            this.meldinger.add(e);
             antallInn++;
             ikkeTom.signal();
         } finally{
@@ -75,7 +67,6 @@ class Monitor {
 
     public boolean telegrafisterFerdigOgMonitorTom(){
         if (meldinger.size() == 0 && telegrafisterFerdig() == true && this.antallUt == this.antallInn){
-            System.out.println("telegrafister og montitor ferdig");
             return true;
         }else{
             return false;
@@ -84,7 +75,6 @@ class Monitor {
 
     public boolean kryptograferFerdigOgMonitorTom(){
         if (meldinger.size() == 0 && kryptograferFerdig() == true && this.antallUt == this.antallInn){
-            System.out.println("kryptografer og monitor ferdig");
             return true;
         }else{
             return false;
@@ -100,6 +90,3 @@ class Monitor {
     }
 
 }
-//
-// this.antallUt == this.antallInn &&
-// this.antallUt == this.antallInn &&
