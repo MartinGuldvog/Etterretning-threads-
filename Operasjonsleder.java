@@ -58,6 +58,7 @@ class Operasjonsleder extends Thread {
                 throw new RuntimeException(e);
             }
         }
+        //sorter listene her!
         testInnhold();
         for (int i = 0; i <= antallkanaler -1; i++){
             skrivTilFil(sorterteMeldinger, i, "tekst" + this.dokuementTeller + ".txt");
