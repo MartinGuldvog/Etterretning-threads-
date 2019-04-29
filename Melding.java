@@ -1,4 +1,4 @@
-class Melding {
+class Melding implements Comparable<Melding>{
     public String innhold;
     public static int sekvensteller;
     private int sekvensnummer;
@@ -21,5 +21,12 @@ class Melding {
 
     public int hentFraID(){
         return fraID;
+    }
+
+    @Override
+    public int compareTo(Melding m){
+        Integer denne = this.sekvensnummer;
+        Integer sammenlign = m.hentSekvensnummer();
+        return denne.compareTo(sammenlign);
     }
 }

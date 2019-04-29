@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
+import java.util.Collections;
 
 class Operasjonsleder extends Thread {
     private Monitor monitor;
@@ -24,6 +25,14 @@ class Operasjonsleder extends Thread {
         for (ArrayList<Melding> i : sorterteMeldinger){
             for (Melding e : i){
                 System.out.println(e.hentMelding());
+            }
+        }
+    }
+
+    public void testSekvensNummer(){
+        for (ArrayList<Melding> i : sorterteMeldinger){
+            for (Melding e : i){
+                System.out.println(e.hentSekvensnummer());
             }
         }
     }
@@ -59,7 +68,12 @@ class Operasjonsleder extends Thread {
             }
         }
         //sorter listene her!
-        testInnhold();
+        for (ArrayList<Melding> array : this.sorterteMeldinger){
+            Collections.sort(array);
+        }
+
+        testSekvensNummer();
+        // testInnhold();
         for (int i = 0; i <= antallkanaler -1; i++){
             skrivTilFil(sorterteMeldinger, i, "tekst" + this.dokuementTeller + ".txt");
             dokuementTeller++;
