@@ -16,18 +16,26 @@ class Monitor {
     Monitor(){}
 
     public boolean telegrafisterFerdig(){
-        for (Telegrafist t : this.telegrafister){
-            if (t.alleLest() == false){
-                return false;
+        if (this.telegrafister.size() > 0){
+            for (Telegrafist t : this.telegrafister){
+                if (t.alleLest() == false){
+                    return false;
+                }else{
+                    return true;
+                }
             }
         }
-        return true;
+        return false;
     }
 
     public boolean kryptograferFerdig(){
-        for (Kryptograf k : this.kryptografer){
-            if (k.alleLest() == false){
-                return false;
+        if (this.kryptografer.size() > 0){
+            for (Kryptograf k : this.kryptografer){
+                if (k.alleLest() == false){
+                    return false;
+                }else{
+                    return true;
+                }
             }
         }
         return true;

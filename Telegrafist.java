@@ -31,9 +31,10 @@ class Telegrafist extends Thread {
     @Override
     public void run(){
         monitor.leggTilTelegraf(this);
-        while (kanal.lytt() != null){
+        String s;
+        while ((s = kanal.lytt()) != null){
             try{
-                Melding melding = new Melding(this.kanal.lytt(), ID);
+                Melding melding = new Melding(s, ID);
                 if (melding.hentMelding() != null){
                     monitor.sendMeldingTilMonitor(melding);
                     System.out.println("test telegraf: Melding: " + melding.hentSekvensnummer() + " TelegrafensID " + this.ID);
@@ -43,5 +44,6 @@ class Telegrafist extends Thread {
             }
         }
         this.alleLest = true;
+        System.out.println("Telegrafist: " + this.ID);
     }
 }

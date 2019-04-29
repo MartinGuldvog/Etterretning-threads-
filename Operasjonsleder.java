@@ -53,7 +53,7 @@ class Operasjonsleder extends Thread {
                 if (ny.hentMelding() != null){
                     int temp = ny.hentFraID();
                     this.sorterteMeldinger.get(temp).add(ny.hentMelding());
-                    // System.out.println(ny.hentMelding());
+                    System.out.println(ny.hentMelding());
                 }
             }catch (InterruptedException e){
                 throw new RuntimeException(e);
