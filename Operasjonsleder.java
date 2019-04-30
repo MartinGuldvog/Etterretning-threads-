@@ -30,9 +30,13 @@ class Operasjonsleder extends Thread {
     }
 
     public void testSekvensNummer(){
+        int teller = 0;
         for (ArrayList<Melding> i : sorterteMeldinger){
+            System.out.println("\nTelegrafist " + teller + " har lyttet på:");
+            teller++;
             for (Melding e : i){
-                System.out.println(e.hentSekvensnummer());
+                // System.out.println(e.hentSekvensnummer());
+                System.out.print(e.hentMelding());
             }
         }
     }

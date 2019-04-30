@@ -23,6 +23,10 @@ class Melding implements Comparable<Melding>{
         return fraID;
     }
 
+    public void leggTilKryptertString(String s){
+        this.innhold = s;
+    }
+
     @Override
     public int compareTo(Melding m){
         Integer denne = this.sekvensnummer;
