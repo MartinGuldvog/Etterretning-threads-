@@ -32,8 +32,6 @@ class Kryptograf extends Thread {
                     String dekrypterMld = Kryptografi.dekrypter(ny.hentMelding());
                     ny.leggTilKryptertString(dekrypterMld);
                     dekryptoMonitor.sendMeldingTilMonitor(ny);
-                    // Melding dekryptertMelding = new Melding(dekrypterMld, ny.hentFraID());
-                    // dekryptoMonitor.sendMeldingTilMonitor(dekryptertMelding);
                 }
             }catch (InterruptedException e){
                 throw new RuntimeException(e);
